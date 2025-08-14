@@ -1,18 +1,47 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
   <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+    <img :src="vueLogo" class="logo vue" alt="Vue logo" />
+  </div>
+
+  <div>
+
+      <h1>Explorador de Archivos</h1>
+
+      <ul>
+        <li v-for="file in files">
+          {{ file.isDir ? "📁" : "📄" }} {{ file.name}}
+        </li>
+      </ul>
+
   </div>
   <HelloWorld msg="Vite + Vue" />
 </template>
+
+<script setup lang="ts">
+import vueLogo from "@/assets/vue.svg"
+import HelloWorld from './components/HelloWorld.vue'
+import {onMounted, ref} from "vue";
+import {invoke} from "@tauri-apps/api/core";
+
+interface FileEntry {
+  name: string;
+  isDir: boolean;
+}
+
+const files = ref<FileEntry[]>([])
+
+async function loadDirectory(path: string) {
+  try {
+    files.value = await invoke < FileEntry[] > ('read_dir', {path})
+  } catch (e) {
+    console.log("Error leyendo directorio: ", e)
+  }
+}
+
+onMounted(() => {
+  loadDirectory("/")
+})
+</script>
 
 <style scoped>
 .logo {
