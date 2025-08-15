@@ -12,9 +12,14 @@
   "dependencies": {
     "@tauri-apps/api": "^2.7.0",
     "path": "^0.12.7",
-    "vue": "^3.5.18"
+    "sass": "^1.90.0",
+    "sass-loader": "^16.0.5",
+    "vite-plugin-vuetify": "^2.1.2",
+    "vue": "^3.5.18",
+    "vuetify": "^3.9.5"
   },
   "devDependencies": {
+    "@mdi/font": "^7.4.47",
     "@tauri-apps/cli": "^2.7.1",
     "@types/node": "^24.2.1",
     "@vitejs/plugin-vue": "^6.0.1",
