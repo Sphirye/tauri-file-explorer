@@ -1,20 +1,28 @@
 <template>
-  <div>
-    <img :src="vueLogo" class="logo vue" alt="Vue logo" />
-  </div>
+  <v-app>
+    <v-main>
+      <v-container>
+        <div>
+          <img :src="vueLogo" class="logo vue" alt="Vue logo" />
+        </div>
 
-  <div>
+        <div>
 
-      <h1>Explorador de Archivos</h1>
+          <v-btn color="primary">XDDD</v-btn>
 
-      <ul>
-        <li v-for="file in files">
-          {{ file.isDir ? "📁" : "📄" }} {{ file.name}}
-        </li>
-      </ul>
+          <h1>Explorador de Archivos</h1>
 
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+          <ul>
+            <li v-for="file in files">
+              {{ file.isDir ? "📁" : "📄" }} {{ file.name}}
+            </li>
+          </ul>
+
+        </div>
+        <HelloWorld msg="Vite + Vue" />
+      </v-container>
+    </v-main>
+  </v-app>
 </template>
 
 <script setup lang="ts">
