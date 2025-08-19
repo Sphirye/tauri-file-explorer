@@ -2,53 +2,14 @@
   <v-app>
     <v-main>
       <v-container>
-        <div>
-          <img :src="vueLogo" class="logo vue" alt="Vue logo" />
-        </div>
-
-        <div>
-
-          <v-btn color="primary">XDDD</v-btn>
-
-          <h1>Explorador de Archivos</h1>
-
-          <ul>
-            <li v-for="file in files">
-              {{ file.isDir ? "📁" : "📄" }} {{ file.name}}
-            </li>
-          </ul>
-
-        </div>
-        <HelloWorld msg="Vite + Vue" />
+        <NavigationComponent/>
       </v-container>
     </v-main>
   </v-app>
 </template>
 
 <script setup lang="ts">
-import vueLogo from "@/assets/vue.svg"
-import HelloWorld from './components/HelloWorld.vue'
-import {onMounted, ref} from "vue";
-import {invoke} from "@tauri-apps/api/core";
-
-interface FileEntry {
-  name: string;
-  isDir: boolean;
-}
-
-const files = ref<FileEntry[]>([])
-
-async function loadDirectory(path: string) {
-  try {
-    files.value = await invoke < FileEntry[] > ('read_dir', {path})
-  } catch (e) {
-    console.log("Error leyendo directorio: ", e)
-  }
-}
-
-onMounted(() => {
-  loadDirectory("/")
-})
+import NavigationComponent from "@/components/NavigationComponent.vue";
 </script>
 
 <style scoped>
